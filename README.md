@@ -1,5 +1,6 @@
 # pythonAPI
-1. clone the ripo 
+## a simple web based crossed platform remote shell
+1. clone the repo 
 2. in the pythonAPI folder, run: 
 `python3 -m venv venv`
 to creat an python virtual envirement
