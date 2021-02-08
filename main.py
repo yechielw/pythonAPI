@@ -6,7 +6,12 @@ history = list()
 @app.route("/")
 def index():
     cmd = str(escape(request.args.get("cmd", "")))
-    result = popen(cmd).read()
+    result = popen(cmd)
+    formatedresult = ""
+    for line in result:
+        formatedresult += result.readline()
+        formatedresult += "<br>"
+
     history.append(cmd)
     return("""
                 <h1>Python API v 0.0.3 (β)</h1>
@@ -16,12 +21,12 @@ def index():
                     <input type="text" name="cmd">
                     <input type="submit" value="Send">
                 </form>
-
-""" + result + "<h3>Lasr command</h3> {} <br>".format(cmd) + "<br> History: <br> {}".format("<br>".join(reversed(history[:-1]))))
+ 
+""" + "<code> {} </code>".format(formatedresult) + "<h3>Last command</h3> {} <br>".format(cmd) + "<br> History: <br> {}".format("<br>".join(reversed(history[:-1]))))
 
 @app.route("/<cmd>")
 def command(cmd):
-    system(cmd)
+    popen(cmd)
     return cmd
     #system(cmd)
 
